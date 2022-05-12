@@ -1,10 +1,8 @@
 package com.fmpoerio.supermarioquack;
 
-import javax.swing.*;
-
-public class Game {
+public class QuackMario {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "Super Mario Quack";
+    private static final String TITLE = "QuackMario";
     private static final String FONT = "Helvetica";
 
 
@@ -21,14 +19,14 @@ public class Game {
         return FONT;
     }
 
-    public Game() {
+    public QuackMario() {
         GameFrame frame = new GameFrame(TITLE);
 
     }
 
 
     public static void main(String[] args) {
-        Game giochino = new Game();
+        QuackMario giochino = new QuackMario();
 
     }
 }
