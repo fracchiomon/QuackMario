@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;">
+    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="iMPLEMENTATA HASHTABLE IN KeyboardMouseListeners.&#10;Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/gamestate/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GameStateManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/KeyboardMouseListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/KeyboardMouseListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/gamestate/MenuState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/QuackMario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/QuackMario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652363562963</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="iMPLEMENTATA HASHTABLE IN KeyboardMouseListeners.&#10;Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;">
+      <created>1652364499550</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652364499550</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -129,6 +132,7 @@
     <MESSAGE value="Funziona il Menu, Build OK, Buon inizio" />
     <MESSAGE value="Per ora Funziona, ho iniziato ad implementare il KeyMouse Listener" />
     <MESSAGE value="Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;" />
+    <MESSAGE value="iMPLEMENTATA HASHTABLE IN KeyboardMouseListeners.&#10;Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="iMPLEMENTATA HASHTABLE IN KeyboardMouseListeners.&#10;Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;" />
   </component>
 </project>

@@ -14,7 +14,12 @@ public abstract class KeyboardMouseListeners implements KeyListener, MouseListen
     };
     protected static int[] ACTION_KEYS_CODES = {KeyEvent.VK_E, KeyEvent.VK_ENTER, MouseEvent.BUTTON1};
     protected static final String[] ACTION_KEYS_NAME = {"E_KEY", "ENTER_KEY", "MOUSE_LEFT_CLICK"};
-    public static Hashtable<String, Integer> KEYS_HASHTABLE;
+    private static Hashtable<String, Integer> KEYS_HASHTABLE;
+
+    public static Hashtable<String, Integer> getKeysHashtable() {
+        return KEYS_HASHTABLE;
+    }
+
     public boolean click = false;
 
     public KeyboardMouseListeners() {
