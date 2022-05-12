@@ -61,6 +61,7 @@ public class MenuState extends GameState {
             switch (currentSelection) {
                 case 0:
                     //play
+                    gameStateManager.getSTATES().push(new Level1State(gameStateManager));
                     break;
                 case 1:
                     //help

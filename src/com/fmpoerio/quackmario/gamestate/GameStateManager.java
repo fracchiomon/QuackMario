@@ -6,6 +6,11 @@ import java.util.Stack;
 
 public class GameStateManager {
     private Stack<GameState> STATES;
+
+    public Stack<GameState> getSTATES() {
+        return STATES;
+    }
+
     public void draw(Graphics g) {
         STATES.peek().draw(g);
     }

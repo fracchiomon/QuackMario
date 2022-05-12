@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="iMPLEMENTATA HASHTABLE IN KeyboardMouseListeners.&#10;Bisogna capire come implementare il KeyboardMouseListeners, tuttavia è implementata basilarmente l'uscita dal programma quando si preme con ENTER su &quot;Esci&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/AudioPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameStateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/KeyboardMouseListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/KeyboardMouseListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/QuackMario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/QuackMario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/gamestate/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/supermarioquack/gamestate/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameStateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
