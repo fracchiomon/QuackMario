@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.Struct;
 
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -91,6 +90,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public GamePanel() {
         super(new BorderLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        addKeyListener(this);
+        setFocusable(true);
         start();
 
 
@@ -110,11 +111,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        gameStateManager.keyPressed(e.getKeyCode());
+        gameStateManager.keyPressed(e);
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        gameStateManager.keyReleased(e.getKeyCode());
+        gameStateManager.keyReleased(e);
     }
 }

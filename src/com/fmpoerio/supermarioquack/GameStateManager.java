@@ -1,6 +1,7 @@
 package com.fmpoerio.supermarioquack;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Stack;
 
 public class GameStateManager {
@@ -12,12 +13,12 @@ public class GameStateManager {
         STATES.peek().tick();
 
     }
-    public void keyPressed(int k) {
-        STATES.peek().keyPressed(k);
+    public void keyPressed(KeyEvent e) {
+        STATES.peek().keyPressed(e);
 
     }
-    public void keyReleased(int k) {
-        STATES.peek().keyReleased(k);
+    public void keyReleased(KeyEvent e) {
+        STATES.peek().keyReleased(e);
 
     }
 

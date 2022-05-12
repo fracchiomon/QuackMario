@@ -2,12 +2,14 @@ package com.fmpoerio.supermarioquack;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 public class MenuState extends GameState{
 
     protected Image background;
     protected final Color bgColor = Color.BLACK;
+    protected KeyboardMouseListeners kbdMouse;
 
     protected static final String[] OPTIONS = {"Nuova Partita", "Help", "Esci"};
     private int currentSelection = 0;
@@ -43,12 +45,36 @@ public class MenuState extends GameState{
     }
 
     @Override
-    public void keyPressed(int k) {
+    public void keyPressed(KeyEvent e) {
+        if ((e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN) || (e.getKeyCode() == KeyEvent.VK_S)) {
+            currentSelection++;
+            if(currentSelection >= OPTIONS.length)
+                currentSelection = 0;
+        }
+        else if ((e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP) || (e.getKeyCode() == KeyEvent.VK_W)) {
+            currentSelection--;
+            if(currentSelection < 0)
+                currentSelection = OPTIONS.length -1;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            switch (currentSelection) {
+                case 0:
+                    //play
+                    break;
+                case 1:
+                    //help
+                    break;
+                case 2:
+                    //ESCE
+                    System.exit(0);
+            }
+        }
 
     }
 
     @Override
-    public void keyReleased(int k) {
+    public void keyReleased(KeyEvent e) {
 
     }
+
 }
