@@ -1,5 +1,5 @@
-package com.fmpoerio.supermarioquack;
-
+package com.fmpoerio.supermarioquack.gamestate;
+import com.fmpoerio.supermarioquack.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 

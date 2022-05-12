@@ -1,11 +1,13 @@
-package com.fmpoerio.supermarioquack;
+package com.fmpoerio.supermarioquack.gamestate;
+
+import com.fmpoerio.supermarioquack.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.net.URL;
 
-public class MenuState extends GameState{
+public class MenuState extends GameState {
 
     protected Image background;
     protected final Color bgColor = Color.BLACK;
