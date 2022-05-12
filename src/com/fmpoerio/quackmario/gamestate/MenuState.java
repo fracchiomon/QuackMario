@@ -1,11 +1,10 @@
-package com.fmpoerio.supermarioquack.gamestate;
+package com.fmpoerio.quackmario.gamestate;
 
-import com.fmpoerio.supermarioquack.*;
+import com.fmpoerio.quackmario.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.net.URL;
 
 public class MenuState extends GameState {
 

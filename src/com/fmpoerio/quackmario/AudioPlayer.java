@@ -1,4 +1,4 @@
-package com.fmpoerio.supermarioquack;
+package com.fmpoerio.quackmario;
 
 // Java program to play an Audio
 // file using Clip Object

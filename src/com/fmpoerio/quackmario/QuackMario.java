@@ -1,5 +1,4 @@
-package com.fmpoerio.supermarioquack;
-import com.fmpoerio.supermarioquack.gamestate.*;
+package com.fmpoerio.quackmario;
 
 public class QuackMario {
     private static final long serialVersionUID = 1L;

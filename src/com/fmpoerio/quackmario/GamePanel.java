@@ -1,4 +1,5 @@
-package com.fmpoerio.supermarioquack;
+package com.fmpoerio.quackmario;
+import com.fmpoerio.quackmario.gamestate.*;
 
 import javax.swing.*;
 import java.awt.*;
