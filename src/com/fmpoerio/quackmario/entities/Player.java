@@ -11,7 +11,22 @@ import java.awt.event.MouseEvent;
 public class Player extends Rectangle {
     private static final long serialVersionUID = 1L;
     private int x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2, width, height;
+    private int xMovSpeed = 2, yMovSpeed = 1;
+    private boolean goesRight = false, goesLeft = false;
     public KeyboardMouseListeners kbdMouse;
+
+    public boolean isGoingRight() {
+        return goesRight;
+    }
+    public boolean isGoingLeft() {
+        return goesLeft;
+    }
+    public void setGoesRight(boolean move) {
+        this.goesRight = move;
+    }
+    public void setGoesLeft(boolean move) {
+        this.goesLeft = move;
+    }
 
     public int getWidthPlayer() {
         return width;
@@ -39,6 +54,10 @@ public class Player extends Rectangle {
     }
 
     public void tick() {
+        if(isGoingRight())
+            x = x + xMovSpeed;
+        else if(isGoingLeft())
+            x = x - xMovSpeed;
 
     }
     public void draw(Graphics g) {
@@ -55,7 +74,23 @@ public class Player extends Rectangle {
         kbdMouse = new KeyboardMouseListeners() {
             @Override
             public void keyPressed(KeyEvent e) {
+                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
+                    setGoesRight(true);
+                }
+                else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
+                    setGoesLeft(true);
+                }
 
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
+                    setGoesRight(false);
+                }
+                else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
+                    setGoesLeft(false);
+                }
             }
 
             @Override
