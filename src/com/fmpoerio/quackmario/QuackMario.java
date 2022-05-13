@@ -1,9 +1,11 @@
 package com.fmpoerio.quackmario;
 
+//Qui si inizializza il Gioco chiamando a cascata tutti gli oggetti che serviranno
+//Abbiamo il Main()
 public class QuackMario {
     private static final long serialVersionUID = 1L;
-    private static final String TITLE = "QuackMario";
-    private static final String FONT = "Helvetica";
+    private static final String TITLE = "QuackMario";   //Nome del Gioco
+    private static final String FONT = "Helvetica";     //Font con cui visualizzo il nome
 
 
 

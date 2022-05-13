@@ -6,10 +6,17 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/*
+ * Qui si svolge il grosso dell'azione, GamePanel estende JPanel e implementa le interfacce per l'animazione a Loop
+ * e per il KeyListening (sicuramente dovrò implementare anche MouseListener, altrimenti potrei usare i metodi di JPanel
+ * senza farli ereditare direttamente, andando a estendere la classe astratta KeyBoardMouseListeners.java
+ *
+ */
+
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-    private static int WIDTH = 854, HEIGHT = 480;
+    private static int WIDTH = 854, HEIGHT = 480; //Dimensioni della finestra di gioco
 
     public static int getWIDTH() {
         return WIDTH;
@@ -28,7 +35,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     private static boolean isRunning = false;
-    private static int FPS = 30;
+    //Ho trovato qualcosa che mi permettesse di usare la classe Thread e sto cercando di capirci un po' di più.
+    //nel frattempo seguo e noto l'utilizzo delle variabili per i FramesPerSecond e il TargetTime che stabilisce
+    //quanto dover aspettare tra un tick e l'altro per poter evitare eventuali drastiche perdite di frames
+    private static int FPS = 60;
     private static long targetTime = 1000 / FPS;
     private Thread thread;
     private GameStateManager gameStateManager;
@@ -46,16 +56,25 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         return thread;
     }
 
+    //Metodo start() che serve per inizializzare il Thread con l'oggetto GamePanel e farlo 'partire'
     public void start() {
         setIsRunning(true);
         thread = new Thread(this);
         thread.start();
     }
 
+    //tick() gestisce cosa viene effettuato ad ogni 'iterazione', in questo caso viene chiamata a cascata la
+    //tick() di GameStateManager
     public void tick() {
         gameStateManager.tick();
     }
-
+    /*
+      run(), Override della funzione Runnable.run(), gestisce il loop del gioco, abbiamo le variabili relativi al tempo
+      iniziale del ciclo (startTime)
+      quello impiegato (elapsedTime) e il tempo da aspettare prima di procedere alla prossima iterazione (waitTime),
+        calcolato come il rapporto tra la differenza fra targetTime e elapsedTime diviso per 10E+6. Se il valore
+        risultante fosse <= 0, allora waitTime viene impostato a 5ms.
+    */
     @Override
     public void run() {
         long startTime, elapsedTime, waitTime;
@@ -76,7 +95,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             }
 
             try {
-                Thread.sleep(waitTime);
+                Thread.sleep(waitTime); //sleep for x milliseconds
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -88,6 +107,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 
 
+    //Costructor di GamePanel in cui si imposta la PreferredSize e si aggiunge il KeyListener, dopodiché la si predispo-
+    //-ne per poter accettare il Focus, infine si chiama la funzione start().
     public GamePanel() {
         super(new BorderLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -98,7 +119,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     }
 
-
+    //paintComponent disegna il rettangolo di gioco richiamando la funzione draw() di GameStateManager (definito da
+    // run())
+    //prima di ogni draw viene chiamata la clearRect() che "ripulisce" l'area ad ogni iterazione di Run()
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

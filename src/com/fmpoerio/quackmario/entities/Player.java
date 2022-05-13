@@ -1,8 +1,9 @@
 package com.fmpoerio.quackmario.entities;
-
+//Imports relativi al progetto
 import com.fmpoerio.quackmario.GamePanel;
 import com.fmpoerio.quackmario.KeyboardMouseListeners;
 
+//Imports relativi a KeyEvents e MouseEvents e AWT
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -11,8 +12,9 @@ import java.awt.event.MouseEvent;
 public class Player extends Rectangle {
     private static final long serialVersionUID = 1L;
     private int x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2, width, height;
-    private int xMovSpeed = 10, yMovSpeed = 10;
-    private boolean goesRight = false, goesLeft = false, goesUp = false, goesDown = false;
+    private final int xMovSpeed = 10;
+    private final int yMovSpeed = 10;
+    private boolean goesRight = false, goesLeft = false, goesUp = false, goesDown = false, honks = false;
     public KeyboardMouseListeners kbdMouse;
 
     public boolean isGoingRight() {
@@ -27,6 +29,15 @@ public class Player extends Rectangle {
     public boolean isGoingDown(){
         return goesDown;
     }
+
+    public boolean isHonking() {
+        return honks;
+    }
+
+    public void setHonks(boolean honks) {
+        this.honks = honks;
+    }
+
     public void setGoesUp(boolean move) {
         this.goesUp = move;
     }
@@ -91,6 +102,9 @@ public class Player extends Rectangle {
                 y = 0;
             }
         }
+        if (isHonking()) {
+            //TODO: IMPLEMENT HONK
+        }
 
 
     }
@@ -101,10 +115,10 @@ public class Player extends Rectangle {
     }
 
     public Player(int widthPlayer, int heightPlayer) {
-        setHeightPlayer(heightPlayer);
+        setHeightPlayer(heightPlayer); //imposto dimensioni di Player e le passo a setBounds()
         setWidthPlayer(widthPlayer);
         setBounds(x, y, width, height);
-
+        //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -123,6 +137,9 @@ public class Player extends Rectangle {
                     setGoesUp(false);
                     setGoesDown(true);
                 }*/
+                if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
+                    setHonks(true);
+                }
 
             }
 
@@ -137,9 +154,13 @@ public class Player extends Rectangle {
                 if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
                     setGoesUp(false);
                 }
+                if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
+                    setHonks(false);
+                }
+                /*
                 else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
                     setGoesDown(false);
-                }
+                }*/
             }
 
             @Override

@@ -5,8 +5,31 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+/*
+Primo livello di QuackMario, teoricamente dovrebbe essere una imitazione del primo livello di SuperMario Bros.
+Quivi viene implementato il Player (e successivamente anche il fondale e le altre entities
+TODO: TUTTO
+COSA FUNZIONA? Player si muove a Sx e Dx e Su, e può passare da una parte all'altra dello schermo
+ */
 public class Level1State extends GameState{
     private Player player;
+    private static int playerWidth, playerHeight;
+
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
+
+    public void setPlayerWidth(int playerWidth) {
+        Level1State.playerWidth = playerWidth;
+    }
+
+    public int getPlayerHeight() {
+        return playerHeight;
+    }
+
+    public void setPlayerHeight(int playerHeight) {
+        Level1State.playerHeight = playerHeight;
+    }
 
     public Level1State(GameStateManager gsm) {
         super(gsm);
@@ -14,12 +37,14 @@ public class Level1State extends GameState{
 
     @Override
     public void init() {
-        player = new Player(30,30);
-
+        setPlayerWidth(50); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
+        setPlayerHeight(80);
+        player = new Player(playerWidth,playerHeight);
     }
 
     @Override
     public void tick() {
+        //la tick chiama (per ora?) la tick() di player
         player.tick();
 
     }

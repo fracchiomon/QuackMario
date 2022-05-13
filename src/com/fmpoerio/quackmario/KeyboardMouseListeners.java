@@ -3,6 +3,18 @@ package com.fmpoerio.quackmario;
 import java.awt.event.*;
 import java.util.Hashtable;
 
+/*
+* Sto cercando di usare una classe a parte per gestire le interazioni da tastiera per tenere tutto il progetto un po'
+*   più ordinato, ma è ardua.
+* Ad ogni modo contiene un po' di dati su Tasti usati per il movimento (alcuni anche superflui) e tasti azione
+* Il movimento del personaggio è gestibile tramite tasti WASD e/o tasti Freccia (anche quelli dell'eventuale tastierino
+*   numerico.
+* I tasti azione (per effettuare l'HONK) sono legati ai tasti 'E', 'Enter', e al 'Mouse_Left_Button' o 'Button1'
+*
+* Ho tentato di implementare una HashTable per unire i valori dei KeyCodes alle chiavi Stringa, ma sembra tutto
+*   abbastanza superfluo al momento, perlomeno ai miei occhi, e quantomeno macchinoso per l'uso dalle altre classi.
+* */
+
 public abstract class KeyboardMouseListeners implements KeyListener, MouseListener, MouseMotionListener {
 
     protected static final int[] MOVE_KEYS_CODES = {KeyEvent.VK_W, KeyEvent.VK_A, KeyEvent.VK_S, KeyEvent.VK_D,

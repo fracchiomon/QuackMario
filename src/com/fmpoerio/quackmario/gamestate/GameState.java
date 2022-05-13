@@ -3,6 +3,11 @@ import com.fmpoerio.quackmario.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
+/*
+GameState corrisponde al generico Livello, è una classe astratta che contiene i metodi usati dai vari livelli, ovvero
+Init(), Tick(), draw(),
+ */
+
 public abstract class GameState extends KeyboardMouseListeners {
     protected GameStateManager gameStateManager;
     public GameState(GameStateManager gsm) {
