@@ -11,8 +11,8 @@ import java.awt.event.MouseEvent;
 public class Player extends Rectangle {
     private static final long serialVersionUID = 1L;
     private int x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2, width, height;
-    private int xMovSpeed = 2, yMovSpeed = 1;
-    private boolean goesRight = false, goesLeft = false;
+    private int xMovSpeed = 10, yMovSpeed = 10;
+    private boolean goesRight = false, goesLeft = false, goesUp = false, goesDown = false;
     public KeyboardMouseListeners kbdMouse;
 
     public boolean isGoingRight() {
@@ -21,6 +21,19 @@ public class Player extends Rectangle {
     public boolean isGoingLeft() {
         return goesLeft;
     }
+    public boolean isGoingUp() {
+        return goesUp;
+    }
+    public boolean isGoingDown(){
+        return goesDown;
+    }
+    public void setGoesUp(boolean move) {
+        this.goesUp = move;
+    }
+    public void setGoesDown(boolean move) {
+        this.goesDown = move;
+    }
+
     public void setGoesRight(boolean move) {
         this.goesRight = move;
     }
@@ -54,10 +67,31 @@ public class Player extends Rectangle {
     }
 
     public void tick() {
-        if(isGoingRight())
+        if(isGoingRight()) {
             x = x + xMovSpeed;
-        else if(isGoingLeft())
+            if (x > GamePanel.getWIDTH()) {
+                x = -30;
+            }
+        }
+        else if(isGoingLeft()) {
             x = x - xMovSpeed;
+            if(x < 0) {
+                x = GamePanel.getWIDTH();
+            }
+        }
+        if(isGoingUp()) {
+            y = y - yMovSpeed;
+            if(y < 0) {
+                y = GamePanel.getHEIGHT();
+            }
+        }
+        else if (isGoingDown()) {
+            y = y + yMovSpeed;
+            if(y > GamePanel.getHEIGHT()) {
+                y = 0;
+            }
+        }
+
 
     }
     public void draw(Graphics g) {
@@ -80,6 +114,15 @@ public class Player extends Rectangle {
                 else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
                     setGoesLeft(true);
                 }
+                if ((e.getKeyCode() == KeyEvent.VK_SPACE)) {
+                    setGoesDown(false);
+                    setGoesUp(true);
+                }
+                /*
+                    else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
+                    setGoesUp(false);
+                    setGoesDown(true);
+                }*/
 
             }
 
@@ -90,6 +133,12 @@ public class Player extends Rectangle {
                 }
                 else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
                     setGoesLeft(false);
+                }
+                if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
+                    setGoesUp(false);
+                }
+                else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
+                    setGoesDown(false);
                 }
             }
 
