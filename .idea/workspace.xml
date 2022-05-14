@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Implementato Player e Level1" />
+    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Implementato Player e Level1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,19 +77,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="QuackMario" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="QuackMario" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

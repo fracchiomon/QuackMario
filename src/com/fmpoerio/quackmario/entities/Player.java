@@ -4,18 +4,24 @@ import com.fmpoerio.quackmario.GamePanel;
 import com.fmpoerio.quackmario.KeyboardMouseListeners;
 
 //Imports relativi a KeyEvents e MouseEvents e AWT
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 //TODO: cambia Rectangle per usare la papera PNG
-public class Player extends Rectangle {
+public class Player {
     private static final long serialVersionUID = 1L;
-    private int x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2, width, height;
+    private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
+    private double jumpSpeed = 5, currJumpSpeed = jumpSpeed;
+    private double maxFallSpeed = 5, currFallSpeed = .1;
+    private int width, height;
     private final int xMovSpeed = 10;
     private final int yMovSpeed = 10;
-    private boolean goesRight = false, goesLeft = false, goesUp = false, goesDown = false, honks = false;
+    private boolean goesRight = false, goesLeft = false, jumping = false, falling = false, honks = false;
+    private final Image playerImage;
     public KeyboardMouseListeners kbdMouse;
+
 
     public boolean isGoingRight() {
         return goesRight;
@@ -23,11 +29,11 @@ public class Player extends Rectangle {
     public boolean isGoingLeft() {
         return goesLeft;
     }
-    public boolean isGoingUp() {
-        return goesUp;
+    public boolean isJumping() {
+        return jumping;
     }
-    public boolean isGoingDown(){
-        return goesDown;
+    public boolean isFalling(){
+        return falling;
     }
 
     public boolean isHonking() {
@@ -38,11 +44,11 @@ public class Player extends Rectangle {
         this.honks = honks;
     }
 
-    public void setGoesUp(boolean move) {
-        this.goesUp = move;
+    public void setJumping(boolean move) {
+        this.jumping = move;
     }
-    public void setGoesDown(boolean move) {
-        this.goesDown = move;
+    public void setFalling(boolean move) {
+        this.falling = move;
     }
 
     public void setGoesRight(boolean move) {
@@ -58,10 +64,10 @@ public class Player extends Rectangle {
     public int getHeightPlayer() {
         return height;
     }
-    public int getXpos() {
+    public double getXpos() {
         return x;
     }
-    public int getYpos() {
+    public double getYpos() {
         return y;
     }
     public void setHeightPlayer(int height) {
@@ -90,18 +96,28 @@ public class Player extends Rectangle {
                 x = GamePanel.getWIDTH();
             }
         }
-        if(isGoingUp()) {
-            y = y - yMovSpeed;
+        if(isJumping()) {
+            y = y - currJumpSpeed;
+            currJumpSpeed -= .1;
+            if(currJumpSpeed <= 0) {
+                currJumpSpeed = jumpSpeed;
+                setJumping(false);
+                setFalling(true);
+            }
             if(y < 0) {
                 y = GamePanel.getHEIGHT();
             }
         }
-        else if (isGoingDown()) {
-            y = y + yMovSpeed;
+        else if (isFalling()) {
+            y = y + currFallSpeed;
+            if (currFallSpeed < maxFallSpeed)
+                currFallSpeed += .1;
             if(y > GamePanel.getHEIGHT()) {
                 y = 0;
             }
         }
+        if (!isFalling())
+            currFallSpeed = .1;
         if (isHonking()) {
             //TODO: IMPLEMENT HONK
         }
@@ -109,15 +125,17 @@ public class Player extends Rectangle {
 
     }
     public void draw(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(x,y,getWidthPlayer(),getHeightPlayer());
+        //g.setColor(Color.BLACK);
+        //g.fillRect(x,y,getWidthPlayer(),getHeightPlayer());
+        g.drawImage(playerImage, (int)getXpos(), (int)getYpos(), null);
 
     }
 
     public Player(int widthPlayer, int heightPlayer) {
         setHeightPlayer(heightPlayer); //imposto dimensioni di Player e le passo a setBounds()
         setWidthPlayer(widthPlayer);
-        setBounds(x, y, width, height);
+        playerImage = new ImageIcon("Assets/QuackMario_Player.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
+        //setBounds(x, y, width, height);
         //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {
             @Override
@@ -129,8 +147,8 @@ public class Player extends Rectangle {
                     setGoesLeft(true);
                 }
                 if ((e.getKeyCode() == KeyEvent.VK_SPACE)) {
-                    setGoesDown(false);
-                    setGoesUp(true);
+                    //setFalling(false);
+                    setJumping(true);
                 }
                 /*
                     else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
@@ -140,6 +158,7 @@ public class Player extends Rectangle {
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
                     setHonks(true);
                 }
+
 
             }
 
@@ -151,9 +170,9 @@ public class Player extends Rectangle {
                 else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
                     setGoesLeft(false);
                 }
-                if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
-                    setGoesUp(false);
-                }
+                /*if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
+                    setJumping(false);
+                }*/
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
                     setHonks(false);
                 }

@@ -37,7 +37,7 @@ public class Level1State extends GameState{
 
     @Override
     public void init() {
-        setPlayerWidth(50); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
+        setPlayerWidth(80); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
         setPlayerHeight(80);
         player = new Player(playerWidth,playerHeight);
     }
@@ -56,6 +56,12 @@ public class Level1State extends GameState{
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { //TORNA AL MENU PRINCIPALE
+            //gameStateManager.getSTATES().push(new MenuState(gameStateManager));
+            gameStateManager.getSTATES().pop(); //poiché precedentemente vi era il Menu, torniamo ad esso, liberando la
+            //memoria del Level1
+        }
+
         player.kbdMouse.keyPressed(e);
     }
 
