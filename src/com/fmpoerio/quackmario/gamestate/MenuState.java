@@ -82,13 +82,14 @@ public class MenuState extends GameState {
                     break;
                 case 1:
                     //help
+                    gameStateManager.getSTATES().push(new HelpState(gameStateManager));
                     break;
                 case 2:
                     //ESCE
                     System.exit(0);
             }
         }
-        if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if(e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) {
             System.exit(0);
         }
 

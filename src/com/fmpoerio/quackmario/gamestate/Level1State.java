@@ -74,7 +74,7 @@ public class Level1State extends GameState{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { //TORNA AL MENU PRINCIPALE
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) { //TORNA AL MENU PRINCIPALE
             //gameStateManager.getSTATES().push(new MenuState(gameStateManager));
             gameStateManager.getSTATES().pop(); //poiché precedentemente vi era il Menu, torniamo ad esso, liberando la
             //memoria del Level1
