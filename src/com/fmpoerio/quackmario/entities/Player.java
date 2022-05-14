@@ -2,6 +2,9 @@ package com.fmpoerio.quackmario.entities;
 //Imports relativi al progetto
 import com.fmpoerio.quackmario.GamePanel;
 import com.fmpoerio.quackmario.KeyboardMouseListeners;
+import com.fmpoerio.quackmario.gamestate.GameState;
+import com.fmpoerio.quackmario.objects.Block;
+import com.fmpoerio.quackmario.physics.Collision;
 
 //Imports relativi a KeyEvents e MouseEvents e AWT
 import javax.swing.*;
@@ -12,7 +15,8 @@ import java.awt.event.MouseEvent;
 //TODO: cambia Rectangle per usare la papera PNG
 public class Player {
     private static final long serialVersionUID = 1L;
-    private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
+    //private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
+    private double x = 40, y = 350;
     private double jumpSpeed = 5, currJumpSpeed = jumpSpeed;
     private double maxFallSpeed = 5, currFallSpeed = .1;
     private int width, height;
@@ -83,37 +87,43 @@ public class Player {
         this.y = y;
     }
 
-    public void tick() {
+    public void tick(Block[] blocks) {
+        for (Block b : blocks) {
+           if (Collision.playerToBlock(new Point((int) (x + width), (int) y), b) || Collision.playerToBlock(new Point
+                   ((int) (x + width), (int) y + height), b));
+        }
+
+
         if(isGoingRight()) {
-            x = x + xMovSpeed;
-            if (x > GamePanel.getWIDTH()) {
-                x = -30;
+            GameState.xOffset += xMovSpeed;
+            if (GameState.xOffset > GamePanel.getWIDTH()) {
+                GameState.xOffset = -30;
             }
         }
         else if(isGoingLeft()) {
-            x = x - xMovSpeed;
-            if(x < 0) {
-                x = GamePanel.getWIDTH();
+            GameState.xOffset -= xMovSpeed;
+            if(GameState.xOffset < 0) {
+                GameState.xOffset = GamePanel.getWIDTH();
             }
         }
         if(isJumping()) {
-            y = y - currJumpSpeed;
+            GameState.yOffset -= currJumpSpeed;
             currJumpSpeed -= .1;
             if(currJumpSpeed <= 0) {
                 currJumpSpeed = jumpSpeed;
                 setJumping(false);
                 setFalling(true);
             }
-            if(y < 0) {
-                y = GamePanel.getHEIGHT();
+            if(GameState.yOffset < 0) {
+                GameState.yOffset = GamePanel.getHEIGHT();
             }
         }
         else if (isFalling()) {
-            y = y + currFallSpeed;
+            GameState.yOffset += currFallSpeed;
             if (currFallSpeed < maxFallSpeed)
                 currFallSpeed += .1;
-            if(y > GamePanel.getHEIGHT()) {
-                y = 0;
+            if(GameState.yOffset > GamePanel.getHEIGHT()) {
+                GameState.yOffset = GamePanel.getHEIGHT() - 30;
             }
         }
         if (!isFalling())
@@ -134,7 +144,7 @@ public class Player {
     public Player(int widthPlayer, int heightPlayer) {
         setHeightPlayer(heightPlayer); //imposto dimensioni di Player e le passo a setBounds()
         setWidthPlayer(widthPlayer);
-        playerImage = new ImageIcon("Assets/QuackMario_Player.png").getImage().getScaledInstance(width,height,Image.SCALE_SMOOTH);
+        playerImage = new ImageIcon("Assets/QuackMario_Player.png").getImage().getScaledInstance(widthPlayer,heightPlayer,Image.SCALE_SMOOTH);
         //setBounds(x, y, width, height);
         //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {

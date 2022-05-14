@@ -10,8 +10,12 @@ Init(), Tick(), draw(),
 
 public abstract class GameState extends KeyboardMouseListeners {
     protected GameStateManager gameStateManager;
+    public static double xOffset, yOffset;
+
     public GameState(GameStateManager gsm) {
         this.gameStateManager = gsm;
+        xOffset = 0;
+        yOffset = 0;
         init();
     }
     public abstract void init();
