@@ -17,12 +17,13 @@ public class GameFrame extends JFrame { //Il Frame del Game, la finestra madre
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLayout(new BorderLayout());
-        setLocationRelativeTo(null);
+
 
         gamePanel = new GamePanel();    //aggiungo il Panel al Frame e con Pack() lo ridimensiono alla sua preferredSize
         add(gamePanel, BorderLayout.CENTER);
         pack();
 
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 }

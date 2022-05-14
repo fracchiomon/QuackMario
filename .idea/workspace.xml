@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Implementato Player e Level1" />
+    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Implementata una base di Jump/Fall, da effettuare i vari Tweak; premendo ESCAPE si torna al Menu Principale, e da esso si esce">
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/physics/Collision.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -71,19 +78,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="QuackMario" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="QuackMario" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -162,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652462838310</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Implementata una base di Jump/Fall, da effettuare i vari Tweak; premendo ESCAPE si torna al Menu Principale, e da esso si esce">
+      <created>1652541096653</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1652541096653</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,6 +186,7 @@
     <MESSAGE value="Implementato Player e Level1" />
     <MESSAGE value="Player si muove a dx e sx" />
     <MESSAGE value="Player si muove a dx e sx, e anche in SU" />
-    <option name="LAST_COMMIT_MESSAGE" value="Player si muove a dx e sx, e anche in SU" />
+    <MESSAGE value="Implementata una base di Jump/Fall, da effettuare i vari Tweak; premendo ESCAPE si torna al Menu Principale, e da esso si esce" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementata una base di Jump/Fall, da effettuare i vari Tweak; premendo ESCAPE si torna al Menu Principale, e da esso si esce" />
   </component>
 </project>

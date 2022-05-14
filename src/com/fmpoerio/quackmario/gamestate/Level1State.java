@@ -1,6 +1,9 @@
 package com.fmpoerio.quackmario.gamestate;
 
+import com.fmpoerio.quackmario.GamePanel;
 import com.fmpoerio.quackmario.entities.*;
+import com.fmpoerio.quackmario.objects.Block;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -13,6 +16,7 @@ COSA FUNZIONA? Player si muove a Sx e Dx e Su, e può passare da una parte all'a
  */
 public class Level1State extends GameState{
     private Player player;
+    private Block[] blocks;
     private static int playerWidth, playerHeight;
 
     public int getPlayerWidth() {
@@ -37,25 +41,45 @@ public class Level1State extends GameState{
 
     @Override
     public void init() {
-        setPlayerWidth(50); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
-        setPlayerHeight(80);
+        setPlayerWidth(100); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
+        setPlayerHeight(100);
         player = new Player(playerWidth,playerHeight);
+        blocks = new Block[3];
+        blocks[0] = new Block(100,100);
+        blocks[1] = new Block(200,300);
+        blocks[2] = new Block(600,400);
+
     }
 
     @Override
     public void tick() {
+        for (Block b : blocks) {
+            b.tick();
+        }
         //la tick chiama (per ora?) la tick() di player
-        player.tick();
+        player.tick(blocks);
 
     }
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(Color.CYAN);
+        g.fillRect(0,0, GamePanel.getWIDTH(), GamePanel.getHEIGHT());
         player.draw(g);
+        for(Block b : blocks) {
+            b.draw(g);
+        }
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { //TORNA AL MENU PRINCIPALE
+            //gameStateManager.getSTATES().push(new MenuState(gameStateManager));
+            gameStateManager.getSTATES().pop(); //poiché precedentemente vi era il Menu, torniamo ad esso, liberando la
+            //memoria del Level1
+        }
+
         player.kbdMouse.keyPressed(e);
     }
 
