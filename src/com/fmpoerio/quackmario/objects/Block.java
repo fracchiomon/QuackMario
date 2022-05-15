@@ -10,7 +10,7 @@ public class Block {
     private int x,y;
     private Image blockImage;
 
-    private static final int blockSize = 32;
+    private static final int blockSize = 48;
 
     public int getX() {
         return x;
@@ -57,9 +57,13 @@ public class Block {
         setBlockImage(new ImageIcon("Assets/QuackMario_Bricks.png").getImage().getScaledInstance(blockSize,
                 blockSize, Image.SCALE_SMOOTH));
 
+
     }
 
     public boolean contains(Point p) {
-        return false;
+        if (this.x >= p.getX() || this.y >= p.getY()) {
+            return true;
+        }
+        else return false;
     }
 }

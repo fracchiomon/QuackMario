@@ -21,7 +21,6 @@ public class Player {
     private double maxFallSpeed = 5, currFallSpeed = .1;
     private int width, height;
     private final int xMovSpeed = 10;
-    private final int yMovSpeed = 10;
     private boolean goesRight = false, goesLeft = false, jumping = false, falling = false, honks = false;
     private final Image playerImage;
     public KeyboardMouseListeners kbdMouse;
@@ -91,20 +90,17 @@ public class Player {
         for (Block b : blocks) {
            if (Collision.playerToBlock(new Point((int) (x + width), (int) y), b) || Collision.playerToBlock(new Point
                    ((int) (x + width), (int) y + height), b));
+
         }
 
 
         if(isGoingRight()) {
             GameState.xOffset += xMovSpeed;
-            if (GameState.xOffset > GamePanel.getWIDTH()) {
-                GameState.xOffset = -30;
-            }
+
         }
         else if(isGoingLeft()) {
             GameState.xOffset -= xMovSpeed;
-            if(GameState.xOffset < 0) {
-                GameState.xOffset = GamePanel.getWIDTH();
-            }
+
         }
         if(isJumping()) {
             GameState.yOffset -= currJumpSpeed;
@@ -114,17 +110,13 @@ public class Player {
                 setJumping(false);
                 setFalling(true);
             }
-            if(GameState.yOffset < 0) {
-                GameState.yOffset = GamePanel.getHEIGHT();
-            }
+
         }
         else if (isFalling()) {
             GameState.yOffset += currFallSpeed;
             if (currFallSpeed < maxFallSpeed)
                 currFallSpeed += .1;
-            if(GameState.yOffset > GamePanel.getHEIGHT()) {
-                GameState.yOffset = GamePanel.getHEIGHT() - 30;
-            }
+
         }
         if (!isFalling())
             currFallSpeed = .1;
