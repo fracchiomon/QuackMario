@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="Aggiunto HelpState (Schermata di Help)">
+    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="-">
+      <change afterPath="$PROJECT_DIR$/Assets/Backgrounds/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Backgrounds/grassbg1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Backgrounds/menubg.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/HUD/hud.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Maps/level1-1.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Maps/level1-2.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Maps/level1-3.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/soundtrack.flac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/soundtrack.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/soundtrack.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Enemies/arachnik.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Enemies/explosion.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Enemies/slugger.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Objects/QuackMario_Reward.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/QuackMario_Player_Left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/fireball.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/playersprites.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Sprites/Player/playersprites_modified.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tilesets/QuackMario_Tile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tilesets/grasstileset.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tilesets/sunny_tileset.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Tilesets/sunny_tileset_legend.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/superMarioQuack_map.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Animation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/MapObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/Menu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/Background.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/Tile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/TileMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_05_22,_20_05_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_05_22__20_05__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/QuackMario_Bricks.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Objects/QuackMario_Bricks.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/QuackMario_Player.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Player/QuackMario_Player.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/AudioPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/AudioPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/KeyboardMouseListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/KeyboardMouseListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/QuackMario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/QuackMario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameStateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameStateManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/HelpState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/HelpState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/MenuState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +75,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2920mziwyjuJCXSJsmLws6ahDsm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -46,19 +92,30 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/fracchiomon/Documents/STM-TOR-VERGHY/Java/Progetto/SuperMarioQuack/SuperMarioQuack/src&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/fracchiomon/Documents/STM-TOR-VERGHY/Java/QuackMario/src/com/fmpoerio/quackmario/entities&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editing.templates&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities" />
+      <recent name="$PROJECT_DIR$/Assets" />
+      <recent name="$PROJECT_DIR$/src/com/fmpoerio/quackmario" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Assets/Sprites/Objects" />
+      <recent name="$PROJECT_DIR$/Assets/Sprites/Player" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.fmpoerio.quackmario.game" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.com.fmpoerio.quackmario.QuackMario">
+  <component name="RunManager" selected="Application.com.fmpoerio.quackmario.game.QuackMario">
     <configuration name="BoardFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BoardFrame" />
       <module name="QuackMario" />
@@ -66,12 +123,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.fmpoerio.quackmario.QuackMario" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.fmpoerio.quackmario.QuackMario" />
+    <configuration name="com.fmpoerio.quackmario.game.QuackMario" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.fmpoerio.quackmario.game.QuackMario" />
       <module name="QuackMario" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.fmpoerio.quackmario.*" />
+          <option name="PATTERN" value="com.fmpoerio.quackmario.game.MenuBar" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -81,9 +138,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.com.fmpoerio.quackmario.QuackMario" />
+        <item itemvalue="Application.com.fmpoerio.quackmario.game.QuackMario" />
         <item itemvalue="Application.BoardFrame" />
-        <item itemvalue="Application.com.fmpoerio.quackmario.QuackMario" />
+        <item itemvalue="Application.com.fmpoerio.quackmario.game.QuackMario" />
         <item itemvalue="Application.BoardFrame" />
       </list>
     </recent_temporary>
@@ -160,7 +217,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652553088935</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="-">
+      <created>1652631248025</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1652631248025</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +248,11 @@
     <MESSAGE value="Player si muove a dx e sx" />
     <MESSAGE value="Player si muove a dx e sx, e anche in SU" />
     <MESSAGE value="Aggiunto HelpState (Schermata di Help)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Aggiunto HelpState (Schermata di Help)" />
+    <MESSAGE value="-" />
+    <option name="LAST_COMMIT_MESSAGE" value="-" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

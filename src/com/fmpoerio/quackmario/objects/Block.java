@@ -1,23 +1,46 @@
 package com.fmpoerio.quackmario.objects;
 
+import com.fmpoerio.quackmario.entities.MapObject;
 import com.fmpoerio.quackmario.gamestate.GameState;
+import com.fmpoerio.quackmario.tilemap.TileMap;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 
-public class Block {
+public class Block extends MapObject {
     private static final long serialVersionUID = 1L;
-    private int x,y;
+    private double x,y;
     private Image blockImage;
+    private TileMap tm;
+    private Rectangle2D blockRect;
+
+    public Rectangle2D getBlockRect() {
+        return blockRect;
+    }
 
     private static final int blockSize = 48;
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
+    }
+
+    public boolean isEmpty() {
+        return false;
     }
 
     public void setX(int x) {
@@ -45,16 +68,30 @@ public class Block {
     }
 
     public void tick() {
+        //mapObject.checkTileMapCollision();
+        // update position
+        setMapPosition();
+        checkTileMapCollision();
+
+
 
     }
     public void draw(Graphics g) {
-        g.drawImage(blockImage, getX()- (int) GameState.xOffset, getY()- (int) GameState.yOffset, null);
+        Graphics2D g2 = (Graphics2D) g;
+        setPosition(x, y);
+        g2.drawImage(blockImage, (int)getX()- (int) GameState.xOffset, (int)getY()- (int) GameState.yOffset, null);
+        //g2.drawImage(blockImage, (int)getX(), (int)getY(), null);
     }
 
-    public Block(int x, int y) {
+    public Block(TileMap tm, int x, int y) {
+        super(tm);
         setX(x);
         setY(y);
-        setBlockImage(new ImageIcon("Assets/QuackMario_Bricks.png").getImage().getScaledInstance(blockSize,
+        width = 40;
+        height = 40;
+        cwidth = 20;
+        cheight = 20;
+        setBlockImage(new ImageIcon("Assets/Sprites/Objects/QuackMario_Bricks.png").getImage().getScaledInstance(blockSize,
                 blockSize, Image.SCALE_SMOOTH));
 
 
@@ -66,4 +103,5 @@ public class Block {
         }
         else return false;
     }
+
 }

@@ -18,7 +18,8 @@ public class GameStateManager {
     }
 
     public void draw(Graphics g) {
-        STATES.peek().draw(g);
+        Graphics2D g2 = (Graphics2D) g ;
+        STATES.peek().draw(g2);
     }
     public void tick() {
         STATES.peek().tick();

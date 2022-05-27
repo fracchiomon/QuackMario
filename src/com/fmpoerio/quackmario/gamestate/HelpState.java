@@ -1,8 +1,8 @@
 package com.fmpoerio.quackmario.gamestate;
 
-import com.fmpoerio.quackmario.GamePanel;
-import com.fmpoerio.quackmario.KeyboardMouseListeners;
-import com.fmpoerio.quackmario.QuackMario;
+import com.fmpoerio.quackmario.game.GamePanel;
+import com.fmpoerio.quackmario.game.KeyboardMouseListeners;
+import com.fmpoerio.quackmario.game.QuackMario;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;

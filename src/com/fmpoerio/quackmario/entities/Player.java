@@ -1,10 +1,10 @@
 package com.fmpoerio.quackmario.entities;
 //Imports relativi al progetto
-import com.fmpoerio.quackmario.GamePanel;
-import com.fmpoerio.quackmario.KeyboardMouseListeners;
+import com.fmpoerio.quackmario.game.KeyboardMouseListeners;
 import com.fmpoerio.quackmario.gamestate.GameState;
+import com.fmpoerio.quackmario.gamestate.GameStateManager;
 import com.fmpoerio.quackmario.objects.Block;
-import com.fmpoerio.quackmario.physics.Collision;
+import com.fmpoerio.quackmario.tilemap.TileMap;
 
 //Imports relativi a KeyEvents e MouseEvents e AWT
 import javax.swing.*;
@@ -13,16 +13,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 //TODO: cambia Rectangle per usare la papera PNG
-public class Player {
+public class Player extends MapObject {
     private static final long serialVersionUID = 1L;
     //private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
-    private double x = 40, y = 350;
-    private double jumpSpeed = 5, currJumpSpeed = jumpSpeed;
-    private double maxFallSpeed = 5, currFallSpeed = .1;
+    private double x = 40, y = 250;
+    private final double jumpSpeed = 5;
+    private double currJumpSpeed = jumpSpeed;
+    private double maxFallSpeed = 5;
+    private double currFallSpeed = .1;
     private int width, height;
     private final int xMovSpeed = 10;
     private boolean goesRight = false, goesLeft = false, jumping = false, falling = false, honks = false;
-    private final Image playerImage;
+    private final Image playerImage, playerImage_honk;
+    // animation actions
+    private static final int IDLE = 0;
+    private static final int WALKING = 1;
+    private static final int JUMPING = 2;
+    private static final int FALLING = 3;
+    private static final int HONK = 4;
     public KeyboardMouseListeners kbdMouse;
 
 
@@ -47,9 +55,9 @@ public class Player {
         this.honks = honks;
     }
 
-    public void setJumping(boolean move) {
-        this.jumping = move;
-    }
+    //public void setJumping(boolean move) {
+        //this.jumping = move;
+    //}
     public void setFalling(boolean move) {
         this.falling = move;
     }
@@ -79,21 +87,76 @@ public class Player {
     public void setWidthPlayer(int width) {
         this.width = width;
     }
-    public void setXpos(int x) {
+    public void setXpos(double x) {
         this.x = x;
     }
-    public void setYpos(int y) {
+    public void setYpos(double y) {
         this.y = y;
     }
+    private void getNextPosition() {
 
-    public void tick(Block[] blocks) {
-        for (Block b : blocks) {
-           if (Collision.playerToBlock(new Point((int) (x + width), (int) y), b) || Collision.playerToBlock(new Point
-                   ((int) (x + width), (int) y + height), b));
+        // movement
+        if (isGoingLeft()) {
+            facingRight = false;
 
+
+            dx -= moveSpeed;
+            GameState.xOffset = dx;
+            if (dx < -maxSpeed) {
+                dx = -maxSpeed;
+            }
+        } else if (isGoingRight()) {
+            facingRight = true;
+
+            dx += moveSpeed;
+            GameState.xOffset = dx;
+            if (dx > maxSpeed) {
+                dx = maxSpeed;
+            }
+        } else {
+            if (dx > 0) {
+                dx -= stopSpeed;
+                GameState.xOffset = dx;
+                if (dx < 0) {
+                    dx = 0;
+                }
+            } else if (dx < 0) {
+                dx += stopSpeed;
+                GameState.xOffset = dx;
+                if (dx > 0) {
+                    dx = 0;
+                }
+            }
         }
 
+        // cannot move while attacking, except in air
+        if ((currentAction == HONK) && !(jumping || falling)) {
+            dx = 0;
+            GameState.xOffset = dx;
+        }
 
+        // jumping
+        if (jumping && !falling) {
+            dy = jumpStart;
+            falling = true;
+        }
+
+        // falling
+        if (falling) {
+
+            if (dy > 0){
+                dy += fallSpeed;
+                jumping = false;
+            }
+
+            if (dy < 0 && !jumping)
+                dy += stopJumpSpeed;
+
+            if (dy > maxFallSpeed)
+                dy = maxFallSpeed;
+
+        }
+/*
         if(isGoingRight()) {
             GameState.xOffset += xMovSpeed;
 
@@ -122,22 +185,147 @@ public class Player {
             currFallSpeed = .1;
         if (isHonking()) {
             //TODO: IMPLEMENT HONK
-        }
+        }*/
+
+    }
+
+    public void tick() {
+
+
+            // update position
+            getNextPosition();
+            setPosition(xtemp, ytemp);
+            checkTileMapCollision();
+
+
+            /*// set animation
+            if (scratching) {
+                if (currentAction != SCRATCHING) {
+                    currentAction = SCRATCHING;
+                    animation.setFrames(sprites.get(SCRATCHING));
+                    animation.setDelay(50);
+                    width = 60;
+                }
+            } else if (firing) {
+                if (currentAction != FIREBALL) {
+                    currentAction = FIREBALL;
+                    animation.setFrames(sprites.get(FIREBALL));
+                    animation.setDelay(100);
+                    width = 30;
+                }
+            } else if (dy > 0) {
+                if (gliding) {
+                    if (currentAction != GLIDING) {
+                        currentAction = GLIDING;
+                        animation.setFrames(sprites.get(GLIDING));
+                        animation.setDelay(100);
+                        width = 30;
+                    }
+                } else if (currentAction != FALLING) {
+                    currentAction = FALLING;
+                    animation.setFrames(sprites.get(FALLING));
+                    animation.setDelay(100);
+                    width = 30;
+                }
+            } else if (dy < 0) {
+                if (currentAction != JUMPING) {
+                    currentAction = JUMPING;
+                    animation.setFrames(sprites.get(JUMPING));
+                    animation.setDelay(-1);
+                    width = 30;
+                }
+            } else if (left || right) {
+                if (currentAction != WALKING) {
+                    currentAction = WALKING;
+                    animation.setFrames(sprites.get(WALKING));
+                    animation.setDelay(40);
+                    width = 30;
+                }
+            } else {
+                if (currentAction != IDLE) {
+                    currentAction = IDLE;
+                    animation.setFrames(sprites.get(IDLE));
+                    animation.setDelay(100);
+                    width = 30;
+                }
+            }
+
+            animation.update();
+
+            // set direction
+            if (currentAction != SCRATCHING && currentAction != FIREBALL) {
+                if (right)
+                    facingRight = true;
+                if (left)
+                    facingRight = false;
+            }
+
+        }*/
+
+        /*for (Block b : blocks) {
+           if (Collision.playerToBlock(new Point((int) (x + width), (int) y), b) || Collision.playerToBlock(new Point
+                   ((int) (x + width), (int) y + height), b));
+
+        }*/
+
+
 
 
     }
     public void draw(Graphics g) {
         //g.setColor(Color.BLACK);
         //g.fillRect(x,y,getWidthPlayer(),getHeightPlayer());
-        g.drawImage(playerImage, (int)getXpos(), (int)getYpos(), null);
+        //Graphics2D g2 = (Graphics2D) g;
+        setMapPosition();
+        //g.drawImage(playerImage_right, (int)getXpos(), (int)getYpos(), null);
+        // draw player
+        /*if (flinching) {
+            long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
+            if (elapsed / 100 % 2 == 0) {
+                return;
+            }
+        }
+*/
+        if (facingRight) {
+            if (isHonking()) {
+                g.drawImage(playerImage_honk, (int) (getXpos() + xmap - width / 2), (int) (getYpos() + ymap - height / 2), null);
+            }
+            else
+                g.drawImage(playerImage, (int) (getXpos() + xmap - width / 2), (int) (getYpos() + ymap - height / 2), null);
+        } else {
+            if (isHonking()) {
+                g.drawImage(playerImage_honk, (int) (getXpos() + xmap - width / 2 + width), (int) (getYpos() + ymap - height / 2),
+                        -width, height, null);
+            }
+            else
+                g.drawImage(playerImage, (int) (getXpos() + xmap - width / 2 + width), (int) (getYpos() + ymap - height / 2),
+                    -width, height, null);
+        }
+
 
     }
 
-    public Player(int widthPlayer, int heightPlayer) {
-        setHeightPlayer(heightPlayer); //imposto dimensioni di Player e le passo a setBounds()
-        setWidthPlayer(widthPlayer);
-        playerImage = new ImageIcon("Assets/QuackMario_Player.png").getImage().getScaledInstance(widthPlayer,heightPlayer,Image.SCALE_SMOOTH);
+    public Player(TileMap tm, int widthPlayer, int heightPlayer) {
+        super(tm);
+        width = widthPlayer;
+        height = heightPlayer;
+        cwidth = 20;
+        cheight = 20;
+
+        moveSpeed = 4;
+        maxSpeed = 1.6;
+        stopSpeed = 0.4;
+        fallSpeed = 0.15;
+        maxFallSpeed = 4.0;
+        jumpStart = -5.5;
+        stopJumpSpeed = 0.3;
+        setHeightPlayer(height); //imposto dimensioni di Player e le passo a setBounds()
+        setWidthPlayer(width);
+        playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(widthPlayer,heightPlayer,Image.SCALE_SMOOTH);
+        playerImage_honk = new ImageIcon("Assets/Sprites/Player/QuackMario_Player_Honk.png").getImage().getScaledInstance(widthPlayer, heightPlayer, Image.SCALE_SMOOTH);
         //setBounds(x, y, width, height);
+        setXpos(x); setYpos(y);
+        setGoesRight(true);
         //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {
             @Override

@@ -8,7 +8,9 @@ package com.fmpoerio.quackmario.gamestate;
 *
 */
 
-import com.fmpoerio.quackmario.*;
+import com.fmpoerio.quackmario.game.GamePanel;
+import com.fmpoerio.quackmario.game.KeyboardMouseListeners;
+import com.fmpoerio.quackmario.game.QuackMario;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +29,7 @@ public class MenuState extends GameState {
         super(gsm);
         //nel costruttore viene solo istanziato l'oggetto background per preparare l'immagine di sfondo
         //AL costruttore viene passato l'oggetto GameStateManager da passare al costruttore di GameState
-        background = new ImageIcon("Assets/QuackMario_Player.png").getImage();
+        background = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage();
 
     }
 
@@ -45,7 +47,7 @@ public class MenuState extends GameState {
     @Override
     public void draw(Graphics g) {
         g.setColor(bgColor);
-        g.fillRect(0,0,GamePanel.getWIDTH(), GamePanel.getHEIGHT());
+        g.fillRect(0,0, GamePanel.getWIDTH(), GamePanel.getHEIGHT());
         g.drawImage(background,GamePanel.getWIDTH()/2 + 100, GamePanel.getHEIGHT()/2 - 100, null);
         for(int i = 0; i < OPTIONS.length; i++) {
             if(i == currentSelection) {
