@@ -1,5 +1,6 @@
 package com.fmpoerio.quackmario.gamestate;
-import com.fmpoerio.quackmario.*;
+import com.fmpoerio.quackmario.game.KeyboardMouseListeners;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 

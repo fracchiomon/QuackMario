@@ -1,12 +1,15 @@
 package com.fmpoerio.quackmario.gamestate;
 
-import com.fmpoerio.quackmario.GamePanel;
+import com.fmpoerio.quackmario.game.GamePanel;
+import com.fmpoerio.quackmario.tilemap.*;
 import com.fmpoerio.quackmario.entities.*;
 import com.fmpoerio.quackmario.objects.Block;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Random;
 
 /*
 Primo livello di QuackMario, teoricamente dovrebbe essere una imitazione del primo livello di SuperMario Bros.
@@ -15,8 +18,10 @@ TODO: TUTTO
 COSA FUNZIONA? Player si muove a Sx e Dx e Su, e può passare da una parte all'altra dello schermo
  */
 public class Level1State extends GameState{
+    private TileMap tileMap;
+    public Background bg;
     private Player player;
-    private Block[] blocks;
+    private ArrayList<Block> blocks;
     private static int playerWidth, playerHeight;
 
     public int getPlayerWidth() {
@@ -43,38 +48,50 @@ public class Level1State extends GameState{
     public void init() {
         setPlayerWidth(100); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
         setPlayerHeight(100);
-        player = new Player(playerWidth,playerHeight);
-        blocks = new Block[3];
-        blocks[0] = new Block(100,100);
-        blocks[1] = new Block(200,300);
-        blocks[2] = new Block(600,400);
+        //player = new Player(playerWidth,playerHeight);
 
+
+        tileMap = new TileMap(16);
+        tileMap.loadTiles("Assets/Tilesets/grasstileset.gif");
+        tileMap.loadMap("Assets/Maps/level1-3.map");
+        tileMap.setPosition(0, 0);
+        tileMap.setTween(1);
+
+        bg = new Background("Assets/Backgrounds/back.png", 0.1);
+
+        player = new Player(tileMap, playerWidth, playerHeight);
+        player.setXpos(100);player.setYpos(3*(GamePanel.getHEIGHT()/4)-20);
+        blocks = new ArrayList<>(3);
+        for(int i = 0; i < 3; i++) {
+            blocks.add(new Block(tileMap, new Random().nextInt(200, 400), new Random().nextInt(200, 400)));
+        }
     }
 
     @Override
     public void tick() {
-        for (Block b : blocks) {
-            b.tick();
-        }
         //la tick chiama (per ora?) la tick() di player
-        player.tick(blocks);
+        player.tick();
+        tileMap.setPosition(GamePanel.getWIDTH() / 2 - player.getx(), GamePanel.getHEIGHT() / 2 - player.gety());
 
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.CYAN);
-        g.fillRect(0,0, GamePanel.getWIDTH(), GamePanel.getHEIGHT());
-        player.draw(g);
+        Graphics2D g2 = (Graphics2D) g ;
+        //g.setColor(Color.CYAN);
+        //g.fillRect(0,0, GamePanel.getWIDTH(), GamePanel.getHEIGHT());
+        bg.draw(g2);
+        tileMap.draw(g2);
+        player.draw(g2);
         for(Block b : blocks) {
-            b.draw(g);
+            b.draw(g2);
         }
 
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { //TORNA AL MENU PRINCIPALE
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_BACK_SPACE) { //TORNA AL MENU PRINCIPALE
             //gameStateManager.getSTATES().push(new MenuState(gameStateManager));
             gameStateManager.getSTATES().pop(); //poiché precedentemente vi era il Menu, torniamo ad esso, liberando la
             //memoria del Level1
