@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="per ora qualcosa funziona.">
+      <change afterPath="$PROJECT_DIR$/Assets/Music/honk.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/honk.wav" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/physics/Collision.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653646979520</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="per ora qualcosa funziona.">
+      <created>1653995967206</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1653995967206</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -12,6 +12,12 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
+import java.applet.*;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 //TODO: cambia Rectangle per usare la papera PNG
 public class Player extends MapObject {
     private static final long serialVersionUID = 1L;
@@ -31,6 +37,8 @@ public class Player extends MapObject {
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
     private static final int HONK = 4;
+    SoundFX honk;
+    String honkPath = "Assets/Music/honk.wav";
     public KeyboardMouseListeners kbdMouse;
 
 
@@ -309,8 +317,8 @@ public class Player extends MapObject {
         super(tm);
         width = widthPlayer;
         height = heightPlayer;
-        cwidth = 20;
-        cheight = 20;
+        cwidth = 16;
+        cheight = 16;
 
         moveSpeed = 4;
         maxSpeed = 1.6;
@@ -326,6 +334,9 @@ public class Player extends MapObject {
         //setBounds(x, y, width, height);
         setXpos(x); setYpos(y);
         setGoesRight(true);
+
+        honk = new SoundFX(honkPath);
+
         //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {
             @Override
@@ -347,6 +358,7 @@ public class Player extends MapObject {
                 }*/
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
                     setHonks(true);
+                    honk.playMusic();
                 }
 
 
@@ -365,6 +377,7 @@ public class Player extends MapObject {
                 }*/
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
                     setHonks(false);
+                    honk.clip.setFramePosition(0);
                 }
                 /*
                 else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
@@ -400,4 +413,73 @@ public class Player extends MapObject {
         };
 
     }
+}
+
+class SoundFX
+{
+    File musicPath;
+    Clip clip;
+
+    SoundFX(String MusicLocation)
+    {
+        try
+        {
+            musicPath = new File (MusicLocation);
+            File musicPath = new File (MusicLocation);
+
+            if(musicPath.exists())
+            {
+                AudioInputStream audioinput = AudioSystem.getAudioInputStream(musicPath);
+                clip = AudioSystem.getClip();
+                clip.open(audioinput);
+            }
+        }
+        catch(Exception Ex)
+        {
+            Ex.printStackTrace();
+        }
+    }
+
+    void playMusic()
+    {
+
+        if(musicPath.exists())
+        {
+            clip.start();
+            //clip.loop(Clip.LOOP_CONTINUOUSLY);
+            //clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+				/*JOptionPane.showMessageDialog(null, "ferma la canzone con ok");
+				long clipTimePosition = clip.getMicrosecondPosition();
+				clip.stop();
+
+				JOptionPane.showMessageDialog(null,"premi per riprendere");
+				clip.setMicrosecondPosition(clipTimePosition);
+				clip.start();
+
+				JOptionPane.showMessageDialog(null,"STOP");*/
+
+        }
+        else
+        {
+            System.out.println("Traccia non trovata!!");
+        }
+
+
+    }
+
+
+
+    void stopMusic()
+    {
+        if(musicPath.exists())
+        {
+            clip.stop();
+        }
+        else
+        {
+            System.out.println("Traccia non trovata!!");
+        }
+    }
+
 }

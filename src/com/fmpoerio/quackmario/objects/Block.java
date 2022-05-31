@@ -87,21 +87,15 @@ public class Block extends MapObject {
         super(tm);
         setX(x);
         setY(y);
-        width = 40;
-        height = 40;
-        cwidth = 20;
-        cheight = 20;
+        width = 16;
+        height = 16;
+        cwidth = 16;
+        cheight = 16;
         setBlockImage(new ImageIcon("Assets/Sprites/Objects/QuackMario_Bricks.png").getImage().getScaledInstance(blockSize,
                 blockSize, Image.SCALE_SMOOTH));
 
 
     }
 
-    public boolean contains(Point p) {
-        if (this.x >= p.getX() || this.y >= p.getY()) {
-            return true;
-        }
-        else return false;
-    }
 
 }

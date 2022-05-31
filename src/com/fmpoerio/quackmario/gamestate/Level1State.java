@@ -46,8 +46,8 @@ public class Level1State extends GameState{
 
     @Override
     public void init() {
-        setPlayerWidth(100); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
-        setPlayerHeight(100);
+        setPlayerWidth(96); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
+        setPlayerHeight(96);
         //player = new Player(playerWidth,playerHeight);
 
 
