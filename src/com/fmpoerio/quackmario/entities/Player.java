@@ -30,7 +30,8 @@ public class Player extends MapObject {
     private int width, height;
     private final int xMovSpeed = 10;
     private boolean goesRight = false, goesLeft = false, jumping = false, falling = false, honks = false;
-    private final Image playerImage, playerImage_honk;
+    private Image playerImage;
+    private Image playerImage_honk;
     // animation actions
     private static final int IDLE = 0;
     private static final int WALKING = 1;
@@ -45,6 +46,10 @@ public class Player extends MapObject {
     public boolean isGoingRight() {
         return goesRight;
     }
+    public double getDx() { return dx; }
+    public double getDy() { return dy; }
+    public void setDx(double dx) {this.dx = dx;}
+    public void setDy(double dy) {this.dy = dy;}
     public boolean isGoingLeft() {
         return goesLeft;
     }
@@ -104,70 +109,98 @@ public class Player extends MapObject {
     private void getNextPosition() {
 
         // movement
-        if (isGoingLeft()) {
+        if (left) {
             facingRight = false;
-
-
             dx -= moveSpeed;
             GameState.xOffset = dx;
             if (dx < -maxSpeed) {
                 dx = -maxSpeed;
+                GameState.xOffset = dx;
+
             }
-        } else if (isGoingRight()) {
+            if (x - dx <= 0) x = 0;
+        } else if (right) {
             facingRight = true;
 
             dx += moveSpeed;
             GameState.xOffset = dx;
             if (dx > maxSpeed) {
                 dx = maxSpeed;
+                //GameState.xOffset = dx;
+
             }
+            if (x + dx >= tileMap.getWidth()) x = tileMap.getWidth() - 1;
         } else {
             if (dx > 0) {
                 dx -= stopSpeed;
-                GameState.xOffset = dx;
+                //GameState.xOffset = dx;
                 if (dx < 0) {
                     dx = 0;
+                    //GameState.xOffset = dx;
+
                 }
+                if (x - dx <= 0) x = 0;
             } else if (dx < 0) {
                 dx += stopSpeed;
-                GameState.xOffset = dx;
+                //GameState.xOffset = dx;
                 if (dx > 0) {
                     dx = 0;
+                    //GameState.xOffset = dx;
+
                 }
+                if (x + dx >= tileMap.getWidth()) x = tileMap.getWidth() - 1;
+
             }
         }
 
         // cannot move while attacking, except in air
         if ((currentAction == HONK) && !(jumping || falling)) {
             dx = 0;
-            GameState.xOffset = dx;
+            //GameState.xOffset = dx;
         }
 
         // jumping
-        if (jumping && !falling) {
+        if (jumping) {
+            System.out.println("Sto salendo: " + tileMap.getType(currRow, currCol));
+
             dy = jumpStart;
-            GameState.yOffset = dy;
-            falling = true;
+            //falling = true;
+            //GameState.yOffset = dy;
+            //if (y + dy <= 0) y = 1;
+
         }
 
         // falling
         if (falling) {
+            System.out.println("Sto cadendo 1");
 
             if (dy > 0){
+                System.out.println("Sto cadendo 3");
+
                 dy += fallSpeed;
-                GameState.yOffset = dy;
                 jumping = false;
+                if (tileMap.getType(currRow, currCol) == 1) {
+                    System.out.println("Sto cadendo: " + tileMap.getType(currRow, currCol));
+                    dy = 0;
+                }
+                //GameState.yOffset = dy;
             }
 
             if (dy < 0 && !jumping) {
+                System.out.println("Sto cadendo 4");
+
                 dy += stopJumpSpeed;
-                GameState.yOffset = dy;
+                //GameState.yOffset = dy;
             }
 
             if (dy > maxFallSpeed) {
+                System.out.println("Sto cadendo 5");
+
                 dy = maxFallSpeed;
-                GameState.yOffset = dy;
+                //GameState.yOffset = dy;
             }
+            System.out.println("Sto cadendo 6");
+
 
         }
 /*
@@ -200,16 +233,22 @@ public class Player extends MapObject {
         if (isHonking()) {
             //TODO: IMPLEMENT HONK
         }*/
+        System.out.println("Valore dx: " + dx);
+        System.out.println("Valore dy: " + dy);
+
 
     }
 
-    public void tick() {
+    public void tick(Block b) {
 
 
             // update position
             getNextPosition();
-            setPosition(xtemp, ytemp);
             checkTileMapCollision();
+            intersects(b);
+            setPosition(xtemp, ytemp);
+            System.out.println("Valore xtemp: " + xtemp);
+            System.out.println("Valore ytemp: "+ ytemp);
 
 
             /*// set animation
@@ -321,27 +360,36 @@ public class Player extends MapObject {
 
     }
 
-    public Player(TileMap tm, int widthPlayer, int heightPlayer, int x, int y) {
-        super(tm);
-        width = widthPlayer;
-        height = heightPlayer;
-        cwidth = 16;
-        cheight = 16;
+    public void init(int width, int height, double x, double y) {
+        this.width = 96;
+        this.height = 96;
+        cwidth = 88;
+        cheight = 88;
 
         moveSpeed = 4;
-        maxSpeed = 1.6;
+        maxSpeed = 5.6;
         stopSpeed = 0.4;
         fallSpeed = 0.15;
         maxFallSpeed = 4.0;
         jumpStart = -5.5;
         stopJumpSpeed = 0.3;
-        setXpos(x); setYpos(y);
-        setGoesRight(true);
-        setHeightPlayer(height); //imposto dimensioni di Player e le passo a setBounds()
-        setWidthPlayer(width);
-        playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(widthPlayer,heightPlayer,Image.SCALE_SMOOTH);
-        playerImage_honk = new ImageIcon("Assets/Sprites/Player/QuackMario_Player_Honk.png").getImage().getScaledInstance(widthPlayer, heightPlayer, Image.SCALE_SMOOTH);
+
+        facingRight = true;
+        falling = true;
+
+        //setXpos(x); setYpos(y);
+        setPosition(x,y);
+        setVector(0,0);
+
+        playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(this.width,this.height,Image.SCALE_SMOOTH);
+        playerImage_honk = new ImageIcon("Assets/Sprites/Player/QuackMario_Player_Honk.png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH);
+    }
+
+    public Player(TileMap tm, int widthPlayer, int heightPlayer, int x, int y) {
+        super(tm);
+
         //setBounds(x, y, width, height);
+        init(widthPlayer, heightPlayer, x, y);
 
 
         honk = new SoundFX(honkPath);
@@ -351,14 +399,19 @@ public class Player extends MapObject {
             @Override
             public void keyPressed(KeyEvent e) {
                 if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
-                    setGoesRight(true);
+                    setRight(true);
                 }
                 else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
-                    setGoesLeft(true);
+                    setLeft(true);
                 }
                 if ((e.getKeyCode() == KeyEvent.VK_SPACE)) {
                     //setFalling(false);
-                    setJumping(true);
+                    //setJumping(true);
+                    jumping = true;
+                    falling = false;
+                    System.out.println("Valore dy: "+ dy);
+                    System.out.println("Lo prendo");
+                    //falling = false;
                 }
                 /*
                     else if((e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_KP_DOWN)) {
@@ -376,14 +429,18 @@ public class Player extends MapObject {
             @Override
             public void keyReleased(KeyEvent e) {
                 if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
-                    setGoesRight(false);
+                    setRight(false);
                 }
                 else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
-                    setGoesLeft(false);
+                    setLeft(false);
                 }
-                /*if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
-                    setJumping(false);
-                }*/
+                if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
+                    //setJumping(false);
+                    jumping = false;
+                    falling = true;
+                    System.out.println("Valore dy: "+ dy);
+                    System.out.println("Lo prendo");
+                }
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
                     setHonks(false);
                     honk.clip.setFramePosition(0);

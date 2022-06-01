@@ -61,7 +61,9 @@ public class Level1State extends GameState{
 
         bg = new Background("Assets/Backgrounds/back.png", 0.1);
 
-        player = new Player(tileMap, playerWidth, playerHeight, 50, 350);
+        player = new Player(tileMap, playerWidth, playerHeight, 50, 380);
+        player.setDx(0);
+        player.setDy(0);
         blocks = new ArrayList<Block>(3);
         rng = new Random();
         int Offset[] = {16, -16}, randOffset, randX = -1, randY = -1, prevRandX = -1, prevRandY = -1;
@@ -83,7 +85,7 @@ public class Level1State extends GameState{
     @Override
     public void tick() {
         //la tick chiama (per ora?) la tick() di player
-        player.tick();
+        player.tick(blocks.get(0));
         tileMap.setPosition(GamePanel.getWIDTH() / 2 - player.getx(), GamePanel.getHEIGHT() / 2 - player.gety());
 
     }

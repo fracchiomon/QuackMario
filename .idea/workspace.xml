@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="per ora qualcosa funziona.">
-      <change afterPath="$PROJECT_DIR$/Assets/Maps/testmap.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/SuperMarioBrosTheme.ogg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Music/SuperMarioBrosTheme.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/Music.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/gamestate/Level1State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/objects/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/TileMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/tilemap/TileMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654011552500</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="per ora qualcosa funziona.">
+      <created>1654099232270</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1654099232270</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         GamePanel.HEIGHT = HEIGHT;
     }
 
+    public Music music;
+
     private static boolean isRunning = false;
     //Ho trovato qualcosa che mi permettesse di usare la classe Thread e sto cercando di capirci un po' di più.
     //nel frattempo seguo e noto l'utilizzo delle variabili per i FramesPerSecond e il TargetTime che stabilisce
@@ -91,9 +93,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 
 
+
         while (getIsRunning()) {
             startTime = System.nanoTime();
             tick();
+            music.playMusic();
+
             repaint();
 
 
@@ -123,6 +128,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     //-ne per poter accettare il Focus, infine si chiama la funzione start().
     public GamePanel() {
         super(new BorderLayout());
+        music = new Music("Assets/Music/SuperMarioBrosTheme.wav");
 
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         addKeyListener(this);
