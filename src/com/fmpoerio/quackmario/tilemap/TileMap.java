@@ -3,12 +3,15 @@ package com.fmpoerio.quackmario.tilemap;
 import com.fmpoerio.quackmario.game.GamePanel;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 public class TileMap {
 
@@ -54,8 +57,7 @@ public class TileMap {
 	public void loadTiles(String s) {
 
 		try {
-
-			//tileset = ImageIO.read(getClass().getResourceAsStream(s));
+			//tileset = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream(s)));
 			tileset = ImageIO.read(new File(s));
 			//tileset = new ImageIcon(s).getImage().getScaledInstance(GamePanel.getWIDTH(),GamePanel.getHEIGHT(),Image.SCALE_SMOOTH);
 			numTilesAcross = tileset.getWidth() / tileSize;

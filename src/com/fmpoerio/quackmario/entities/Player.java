@@ -22,7 +22,7 @@ import javax.sound.sampled.Clip;
 public class Player extends MapObject {
     private static final long serialVersionUID = 1L;
     //private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
-    private double x = 40, y = 250;
+    private double x, y;
     private final double jumpSpeed = 5;
     private double currJumpSpeed = jumpSpeed;
     private double maxFallSpeed = 5;
@@ -146,6 +146,7 @@ public class Player extends MapObject {
         // jumping
         if (jumping && !falling) {
             dy = jumpStart;
+            GameState.yOffset = dy;
             falling = true;
         }
 
@@ -154,14 +155,19 @@ public class Player extends MapObject {
 
             if (dy > 0){
                 dy += fallSpeed;
+                GameState.yOffset = dy;
                 jumping = false;
             }
 
-            if (dy < 0 && !jumping)
+            if (dy < 0 && !jumping) {
                 dy += stopJumpSpeed;
+                GameState.yOffset = dy;
+            }
 
-            if (dy > maxFallSpeed)
+            if (dy > maxFallSpeed) {
                 dy = maxFallSpeed;
+                GameState.yOffset = dy;
+            }
 
         }
 /*
@@ -287,33 +293,35 @@ public class Player extends MapObject {
         setMapPosition();
         //g.drawImage(playerImage_right, (int)getXpos(), (int)getYpos(), null);
         // draw player
-        /*if (flinching) {
+        boolean flinching = false;
+        if (flinching) {
+            long flinchTimer = 1L;
             long elapsed = (System.nanoTime() - flinchTimer) / 1000000;
             if (elapsed / 100 % 2 == 0) {
                 return;
             }
         }
-*/
+
         if (facingRight) {
             if (isHonking()) {
-                g.drawImage(playerImage_honk, (int) (getXpos() + xmap - width / 2), (int) (getYpos() + ymap - height / 2), null);
+                g.drawImage(playerImage_honk, (int) (getx() + xmap - width / 2), (int) (gety() + ymap - height / 2), null);
             }
             else
-                g.drawImage(playerImage, (int) (getXpos() + xmap - width / 2), (int) (getYpos() + ymap - height / 2), null);
+                g.drawImage(playerImage, (int) (getx() + xmap - width / 2), (int) (gety() + ymap - height / 2), null);
         } else {
             if (isHonking()) {
-                g.drawImage(playerImage_honk, (int) (getXpos() + xmap - width / 2 + width), (int) (getYpos() + ymap - height / 2),
+                g.drawImage(playerImage_honk, (int) (getx() + xmap - width / 2 + width), (int) (gety() + ymap - height / 2),
                         -width, height, null);
             }
             else
-                g.drawImage(playerImage, (int) (getXpos() + xmap - width / 2 + width), (int) (getYpos() + ymap - height / 2),
+                g.drawImage(playerImage, (int) (getx() + xmap - width / 2 + width), (int) (gety() + ymap - height / 2),
                     -width, height, null);
         }
 
 
     }
 
-    public Player(TileMap tm, int widthPlayer, int heightPlayer) {
+    public Player(TileMap tm, int widthPlayer, int heightPlayer, int x, int y) {
         super(tm);
         width = widthPlayer;
         height = heightPlayer;
@@ -327,13 +335,14 @@ public class Player extends MapObject {
         maxFallSpeed = 4.0;
         jumpStart = -5.5;
         stopJumpSpeed = 0.3;
+        setXpos(x); setYpos(y);
+        setGoesRight(true);
         setHeightPlayer(height); //imposto dimensioni di Player e le passo a setBounds()
         setWidthPlayer(width);
         playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(widthPlayer,heightPlayer,Image.SCALE_SMOOTH);
         playerImage_honk = new ImageIcon("Assets/Sprites/Player/QuackMario_Player_Honk.png").getImage().getScaledInstance(widthPlayer, heightPlayer, Image.SCALE_SMOOTH);
         //setBounds(x, y, width, height);
-        setXpos(x); setYpos(y);
-        setGoesRight(true);
+
 
         honk = new SoundFX(honkPath);
 
