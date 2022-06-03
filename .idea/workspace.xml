@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="per ora qualcosa funziona.">
+    <list default="true" id="e9905d9c-8702-4b6c-966a-099506028b26" name="Changes" comment="CADE VERSO LA MORTE MA C'E LA MUSICA">
       <change afterPath="$PROJECT_DIR$/Assets/Music/SuperMarioBrosTheme.ogg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Assets/Music/SuperMarioBrosTheme.wav" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/com/fmpoerio/quackmario/game/Music.java" afterDir="false" />
@@ -219,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1654099232270</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="CADE VERSO LA MORTE MA C'E LA MUSICA">
+      <created>1654107897351</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1654107897351</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -245,7 +252,8 @@
     <MESSAGE value="Aggiunto HelpState (Schermata di Help)" />
     <MESSAGE value="-" />
     <MESSAGE value="per ora qualcosa funziona." />
-    <option name="LAST_COMMIT_MESSAGE" value="per ora qualcosa funziona." />
+    <MESSAGE value="CADE VERSO LA MORTE MA C'E LA MUSICA" />
+    <option name="LAST_COMMIT_MESSAGE" value="CADE VERSO LA MORTE MA C'E LA MUSICA" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
