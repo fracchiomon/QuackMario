@@ -23,6 +23,8 @@ public class Level1State extends GameState{
     private Player player;
     private ArrayList<Block> blocks;
     private static int playerWidth, playerHeight;
+    Random rng;
+
 
     public int getPlayerWidth() {
         return playerWidth;
@@ -46,31 +48,44 @@ public class Level1State extends GameState{
 
     @Override
     public void init() {
-        setPlayerWidth(100); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
-        setPlayerHeight(100);
+        setPlayerWidth(96); //imposto le dimensioni di Player per il Livello 1 e le passo al costruttore di Player
+        setPlayerHeight(96);
         //player = new Player(playerWidth,playerHeight);
 
 
-        tileMap = new TileMap(16);
-        tileMap.loadTiles("Assets/Tilesets/grasstileset.gif");
-        tileMap.loadMap("Assets/Maps/level1-3.map");
+        tileMap = new TileMap(32);
+        tileMap.loadTiles("Assets/Tilesets/QuackMario_Tile.png");
+        tileMap.loadMap("Assets/Maps/testmap.map");
         tileMap.setPosition(0, 0);
         tileMap.setTween(1);
 
         bg = new Background("Assets/Backgrounds/back.png", 0.1);
 
-        player = new Player(tileMap, playerWidth, playerHeight);
-        player.setXpos(100);player.setYpos(3*(GamePanel.getHEIGHT()/4)-20);
-        blocks = new ArrayList<>(3);
+        player = new Player(tileMap, playerWidth, playerHeight, 50, 380);
+        player.setDx(0);
+        player.setDy(0);
+        blocks = new ArrayList<Block>(3);
+        rng = new Random();
+        int Offset[] = {16, -16}, randOffset, randX = -1, randY = -1, prevRandX = -1, prevRandY = -1;
+
         for(int i = 0; i < 3; i++) {
-            blocks.add(new Block(tileMap, new Random().nextInt(200, 400), new Random().nextInt(200, 400)));
+            prevRandX = randX;
+            prevRandY = randY;
+            randX = rng.nextInt(200, 400);
+            randY = rng.nextInt(200, 400);
+            randOffset = rng.nextInt(2);
+            if (randX == randY || prevRandX == randX || prevRandY == randY) {
+                i--;
+            }
+            else
+                blocks.add(new Block(tileMap,randX + Offset[randOffset], randY + Offset[randOffset]));
         }
     }
 
     @Override
     public void tick() {
         //la tick chiama (per ora?) la tick() di player
-        player.tick();
+        player.tick(blocks.get(0));
         tileMap.setPosition(GamePanel.getWIDTH() / 2 - player.getx(), GamePanel.getHEIGHT() / 2 - player.gety());
 
     }
@@ -81,11 +96,9 @@ public class Level1State extends GameState{
         //g.setColor(Color.CYAN);
         //g.fillRect(0,0, GamePanel.getWIDTH(), GamePanel.getHEIGHT());
         bg.draw(g2);
-        tileMap.draw(g2);
         player.draw(g2);
-        for(Block b : blocks) {
-            b.draw(g2);
-        }
+        tileMap.draw(g2);
+
 
     }
 

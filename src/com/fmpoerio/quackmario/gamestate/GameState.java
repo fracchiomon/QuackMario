@@ -14,6 +14,7 @@ public abstract class GameState extends KeyboardMouseListeners {
     public static double xOffset, yOffset;
 
     public GameState(GameStateManager gsm) {
+        super();
         this.gameStateManager = gsm;
         xOffset = 0;
         yOffset = 0;
