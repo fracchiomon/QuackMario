@@ -108,11 +108,11 @@ public class Block extends MapObject {
         height = 16;
         cwidth = 16;
         cheight = 16;
-        tileBlock = new BufferedImage(width, height, BufferedImage.SCALE_SMOOTH);
+        //tileBlock = new BufferedImage(width, height, BufferedImage.SCALE_SMOOTH);
         //blockTile = new Tile();
         setBlockImage(new ImageIcon("Assets/Sprites/Objects/QuackMario_Bricks.png").getImage().getScaledInstance(blockSize,
                 blockSize, Image.SCALE_SMOOTH));
-        blockTile = new Tile(tileBlock, BufferedImage.TYPE_INT_RGB);
+        //blockTile = new Tile(tileBlock, BufferedImage.TYPE_INT_RGB);
 
 
 

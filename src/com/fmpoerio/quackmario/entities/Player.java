@@ -1,18 +1,15 @@
 package com.fmpoerio.quackmario.entities;
 //Imports relativi al progetto
+
 import com.fmpoerio.quackmario.game.KeyboardMouseListeners;
 import com.fmpoerio.quackmario.gamestate.GameState;
-import com.fmpoerio.quackmario.gamestate.GameStateManager;
-import com.fmpoerio.quackmario.objects.Block;
 import com.fmpoerio.quackmario.tilemap.TileMap;
 
 //Imports relativi a KeyEvents e MouseEvents e AWT
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
-import java.applet.*;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -20,43 +17,76 @@ import javax.sound.sampled.Clip;
 
 //TODO: cambia Rectangle per usare la papera PNG
 public class Player extends MapObject {
+
+    //VARIABLES
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     private static final long serialVersionUID = 1L;
     //private double x = GamePanel.getWIDTH()/2, y = GamePanel.getHEIGHT()/2;
     private double x, y;
+    //private int width, height;
+    private final int xMovSpeed = 10;
     private final double jumpSpeed = 5;
     private double currJumpSpeed = jumpSpeed;
     private double maxFallSpeed = 5;
     private double currFallSpeed = .1;
-    private int width, height;
-    private final int xMovSpeed = 10;
+
     private boolean goesRight = false, goesLeft = false, jumping = false, falling = false, honks = false;
     private Image playerImage;
     private Image playerImage_honk;
+
     // animation actions
     private static final int IDLE = 0;
     private static final int WALKING = 1;
     private static final int JUMPING = 2;
     private static final int FALLING = 3;
     private static final int HONK = 4;
-    SoundFX honk;
-    String honkPath = "Assets/Music/honk.wav";
+
+    // SOUND FX
+    private SoundFX honk;
+    private final String honkPath = "Assets/Music/honk.wav";
+
+    //KEYBOARD INTERACTIONS
     public KeyboardMouseListeners kbdMouse;
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //FUNCTIONS
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //GETTERS AND SETTERS
+    //---------------------------------------------------------------------------------------------//
 
     public boolean isGoingRight() {
         return goesRight;
     }
-    public double getDx() { return dx; }
-    public double getDy() { return dy; }
-    public void setDx(double dx) {this.dx = dx;}
-    public void setDy(double dy) {this.dy = dy;}
+
+    public double getDx() {
+        return dx;
+    }
+
+    public double getDy() {
+        return dy;
+    }
+
+    public void setDx(double dx) {
+        this.dx = dx;
+    }
+
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+
     public boolean isGoingLeft() {
         return goesLeft;
     }
+
     public boolean isJumping() {
         return jumping;
     }
-    public boolean isFalling(){
+
+    public boolean isFalling() {
         return falling;
     }
 
@@ -69,7 +99,7 @@ public class Player extends MapObject {
     }
 
     //public void setJumping(boolean move) {
-        //this.jumping = move;
+    //this.jumping = move;
     //}
     public void setFalling(boolean move) {
         this.falling = move;
@@ -78,6 +108,7 @@ public class Player extends MapObject {
     public void setGoesRight(boolean move) {
         this.goesRight = move;
     }
+
     public void setGoesLeft(boolean move) {
         this.goesLeft = move;
     }
@@ -85,27 +116,36 @@ public class Player extends MapObject {
     public int getWidthPlayer() {
         return width;
     }
+
     public int getHeightPlayer() {
         return height;
     }
+
     public double getXpos() {
         return x;
     }
+
     public double getYpos() {
         return y;
     }
+
     public void setHeightPlayer(int height) {
         this.height = height;
     }
+
     public void setWidthPlayer(int width) {
         this.width = width;
     }
+
     public void setXpos(double x) {
         this.x = x;
     }
+
     public void setYpos(double y) {
         this.y = y;
     }
+    //---------------------------------------------------------------------------------------------//
+
     private void getNextPosition() {
 
         // movement
@@ -174,7 +214,7 @@ public class Player extends MapObject {
         if (falling) {
             System.out.println("Sto cadendo 1");
 
-            if (dy > 0){
+            if (dy > 0) {
                 System.out.println("Sto cadendo 3");
 
                 dy += fallSpeed;
@@ -239,16 +279,16 @@ public class Player extends MapObject {
 
     }
 
-    public void tick(Block b) {
+    public void tick() {
 
 
-            // update position
-            getNextPosition();
-            checkTileMapCollision();
-            intersects(b);
-            setPosition(xtemp, ytemp);
-            System.out.println("Valore xtemp: " + xtemp);
-            System.out.println("Valore ytemp: "+ ytemp);
+        // update position
+        getNextPosition();
+        checkTileMapCollision();
+
+        setPosition(xtemp, ytemp);
+        System.out.println("Valore xtemp: " + xtemp);
+        System.out.println("Valore ytemp: " + ytemp);
 
 
             /*// set animation
@@ -322,9 +362,8 @@ public class Player extends MapObject {
         }*/
 
 
-
-
     }
+
     public void draw(Graphics g) {
         //g.setColor(Color.BLACK);
         //g.fillRect(x,y,getWidthPlayer(),getHeightPlayer());
@@ -344,27 +383,25 @@ public class Player extends MapObject {
         if (facingRight) {
             if (isHonking()) {
                 g.drawImage(playerImage_honk, (int) (getx() + xmap - width / 2), (int) (gety() + ymap - height / 2), null);
-            }
-            else
+            } else
                 g.drawImage(playerImage, (int) (getx() + xmap - width / 2), (int) (gety() + ymap - height / 2), null);
         } else {
             if (isHonking()) {
                 g.drawImage(playerImage_honk, (int) (getx() + xmap - width / 2 + width), (int) (gety() + ymap - height / 2),
                         -width, height, null);
-            }
-            else
+            } else
                 g.drawImage(playerImage, (int) (getx() + xmap - width / 2 + width), (int) (gety() + ymap - height / 2),
-                    -width, height, null);
+                        -width, height, null);
         }
 
 
     }
 
     public void init(int width, int height, double x, double y) {
-        this.width = 96;
-        this.height = 96;
-        cwidth = 88;
-        cheight = 88;
+        this.width = width;
+        this.height = height;
+        cwidth = width - 5;
+        cheight =height - 5;
 
         moveSpeed = 4;
         maxSpeed = 5.6;
@@ -378,30 +415,29 @@ public class Player extends MapObject {
         falling = true;
 
         //setXpos(x); setYpos(y);
-        setPosition(x,y);
-        setVector(0,0);
+        setPosition(x, y);
+        setVector(0, 0);
 
-        playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(this.width,this.height,Image.SCALE_SMOOTH);
+        playerImage = new ImageIcon("Assets/Sprites/Player/QuackMario_Player.png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH);
         playerImage_honk = new ImageIcon("Assets/Sprites/Player/QuackMario_Player_Honk.png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH);
     }
 
+    //---------------------------------------------------------------------------------------------//
+
+    //CONSTRUCTOR
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(TileMap tm, int widthPlayer, int heightPlayer, int x, int y) {
         super(tm);
-
         //setBounds(x, y, width, height);
         init(widthPlayer, heightPlayer, x, y);
-
-
         honk = new SoundFX(honkPath);
-
         //uso kbdMouse per gestire le interazioni da tastiera e mouse
         kbdMouse = new KeyboardMouseListeners() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
+                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)) {
                     setRight(true);
-                }
-                else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
                     setLeft(true);
                 }
                 if ((e.getKeyCode() == KeyEvent.VK_SPACE)) {
@@ -409,7 +445,7 @@ public class Player extends MapObject {
                     //setJumping(true);
                     jumping = true;
                     falling = false;
-                    System.out.println("Valore dy: "+ dy);
+                    System.out.println("Valore dy: " + dy);
                     System.out.println("Lo prendo");
                     //falling = false;
                 }
@@ -428,17 +464,16 @@ public class Player extends MapObject {
 
             @Override
             public void keyReleased(KeyEvent e) {
-                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)){
+                if ((e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT || e.getKeyCode() == KeyEvent.VK_KP_RIGHT)) {
                     setRight(false);
-                }
-                else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
+                } else if ((e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_KP_LEFT)) {
                     setLeft(false);
                 }
                 if ((e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_KP_UP)) {
                     //setJumping(false);
                     jumping = false;
                     falling = true;
-                    System.out.println("Valore dy: "+ dy);
+                    System.out.println("Valore dy: " + dy);
                     System.out.println("Lo prendo");
                 }
                 if ((e.getKeyCode() == KeyEvent.VK_E || e.getKeyCode() == KeyEvent.VK_ENTER)) {
@@ -450,67 +485,35 @@ public class Player extends MapObject {
                     setGoesDown(false);
                 }*/
             }
-
-            @Override
-            public void mouseClicked(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-            }
         };
 
     }
 }
 
-class SoundFX
-{
+////////////////////////////////////////////////////////////////////////////////////////////////
+//END OF CLASS PLAYER
+class SoundFX {
     File musicPath;
     Clip clip;
 
-    SoundFX(String MusicLocation)
-    {
-        try
-        {
-            musicPath = new File (MusicLocation);
-            File musicPath = new File (MusicLocation);
+    SoundFX(String MusicLocation) {
+        try {
+            musicPath = new File(MusicLocation);
+            File musicPath = new File(MusicLocation);
 
-            if(musicPath.exists())
-            {
+            if (musicPath.exists()) {
                 AudioInputStream audioinput = AudioSystem.getAudioInputStream(musicPath);
                 clip = AudioSystem.getClip();
                 clip.open(audioinput);
             }
-        }
-        catch(Exception Ex)
-        {
+        } catch (Exception Ex) {
             Ex.printStackTrace();
         }
     }
 
-    void playMusic()
-    {
+    void playMusic() {
 
-        if(musicPath.exists())
-        {
+        if (musicPath.exists()) {
             clip.start();
             //clip.loop(Clip.LOOP_CONTINUOUSLY);
             //clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -525,9 +528,7 @@ class SoundFX
 
 				JOptionPane.showMessageDialog(null,"STOP");*/
 
-        }
-        else
-        {
+        } else {
             System.out.println("Traccia non trovata!!");
         }
 
@@ -535,15 +536,10 @@ class SoundFX
     }
 
 
-
-    void stopMusic()
-    {
-        if(musicPath.exists())
-        {
+    void stopMusic() {
+        if (musicPath.exists()) {
             clip.stop();
-        }
-        else
-        {
+        } else {
             System.out.println("Traccia non trovata!!");
         }
     }
